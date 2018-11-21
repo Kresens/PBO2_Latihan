@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model_HR;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,11 +39,11 @@ public class MyOracle {
     public Connection getConnection() {
         Connection con = null;
         try {
-            //step1 load the driver class
+           
             Class.forName("oracle.jdbc.driver.OracleDriver");
             String connString = "jdbc:oracle:thin:@" + ipAddress + ":" + port + ":" + sid;
             System.out.println(connString);
-            //step2 create  the connection object
+           
             con = DriverManager.getConnection(connString, userName, password);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MyOracle.class.getName()).log(Level.SEVERE, null, ex);
