@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package TestOracle;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+/**
+ *
+ * @author admin
+ */
+public class TestOracle1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        try {
+//step1 load the driver class  
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+//step2 create  the connection object  
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@172.23.9.185:1521:orcl", "MHS175314108", "MHS175314108");
+
+//step3 create the statement object  
+            Statement stmt = con.createStatement();
+
+//step4 execute query  
+            ResultSet rs = stmt.executeQuery("select e.first_name, e.last_name from MHS175314108.EMPLOYEES e");
+            while (rs.next()) {
+                System.out.println(rs.getInt(1) + "  " + rs.getString(2));
+            }
+
+//step5 close the connection object  
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
